@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <script src="https://cdn.jsdelivr.net/jsbarcode/3.3.7/barcodes/JsBarcode.itf.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7"
+        crossorigin="anonymous">
+
+    <style>
+        body {
+            font-size: 1.2em;
+            color: rgb(23, 106, 91);
+        }
+
+        div .row div {
+            padding: 1px;
+            vertical-align: top;
+        }
+
+        .boleto-campo {
+            border-left: 3px solid rgb(187, 158, 94);
+        }
+
+        .boleto-row {
+            font-size: 0.8em;
+            border-bottom: 1px solid rgb(51, 124, 111);
+            padding: 0px;
+        }
+
+        .boleto-row-no-border {
+            font-size: 0.8em;
+            padding: 0px;
+            padding-left: 3px;
+        }
+
+        .border {
+            border-bottom: 1px solid rgb(51, 124, 111);
+        }
+
+        .boleto-row div {
+            padding: 0px;
+        }
+
+        dl {
+            margin-bottom: 0px;
+            white-space: nowrap;
+        }
+
+        dd {
+            font-size: 1.1em;
+            color: black;
+            font-weight: bold;
+            white-space: nowrap;
+            min-height: 1.2em;
+            padding-right: 3px;
+        }
+        
+        .informacoes-value {
+            font-size: 1.1em;
+            color: black;
+            font-weight: bold;
+            white-space: nowrap;
+            min-height: 1.2em;
+        }
+
+        .boleto-container {
+            width: 760px;
+            margin-top: 10px;
+        }
+
+        .top-row {
+            border-bottom: 4px solid rgb(51, 124, 111);
+            color: rgb(23, 106, 91);
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+
+        .num-banco {
+            text-align: center;
+            border-left: 4px solid rgb(51, 124, 111);
+            border-right: 4px solid rgb(51, 124, 111);
+        }
+
+        .recibo-pagador-text {
+            text-align: right;
+            vertical-align: center;
+        }
+
+        .linha-digitavel {
+            text-align: right;
+        }
+
+        .informacoes-caption {
+            border-bottom: 0;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+
+        .autenticacao-mecanica {
+            font-size: 0.9em;
+        }
+
+        .cut-line {
+            font-size: 0.8em;
+        }
+
+        .cut-line hr {
+            border-top: 1px dashed rgb(51, 124, 111);
+            margin-top: 0px;
+        }
+
+        .cut-line div {
+            margin: 0px;
+        }
+
+        .instrucao {
+            color: black;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: clip;
+        }
+        
+        .min-height{
+            min-height: 1.5em;   
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container boleto-container" name="boleto">
+
+        {% if include_recibo_sacado %}
+
+        <!-- Recibo do sacado -->
+        <div id="recibo-sacado">
+            <div class="row boleto-row top-row">
+                <div class="col-xs-2 logo"><img src="data:image/jpg;base64,{{ logo_base64|string }}" style="height:25px;"></div>
+                <div class="col-xs-1 num-banco">085-1</div>
+                <div class="col-xs-9 recibo-pagador-text">RECIBO DO PAGADOR
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-5">
+                    <dl><dt>Benefici&aacute;rio</dt>
+                        <dd>{{ boleto.cedente }}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Agência/Conta</dt>
+                        <dd class="text-right">{{ boleto.agencia|format_agencia_conta }} / {{ boleto.conta_corrente|format_agencia_conta }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-1 boleto-campo">
+                    <dl><dt>Espécie</dt>
+                        <dd class="text-center">{{ boleto.especie }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-1 boleto-campo">
+                    <dl><dt>Quantidade</dt>
+                        <dd class="text-center">{{ boleto.quantidade|default('', True) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Nosso número</dt>
+                        <dd class="text-right">{{ boleto.nosso_numero }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-2">
+                    <dl><dt>Número do documento</dt>
+                        <dd>{{ boleto.numero_documento }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-1 boleto-campo">
+                    <dl><dt>Contrato</dt>
+                        <dd>{{ boleto.contrato }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>CPF/CEI/CNPJ</dt>
+                        <dd>{{ boleto.cpf_cei_cnpj }}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Vencimento</dt>
+                        <dd class="text-center">{{ boleto.vencimento|format_date_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Valor documento</dt>
+                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-2">
+                    <dl><dt>(-) Desconto / Abatimento</dt>
+                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>(-) Outras deduções</dt>
+                        <dd class="text-right">{{ boleto.valor_outras_deducoes|format_currency_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>(+) Mora / Multa</dt>
+                        <dd class="text-right">{{ boleto.valor_multa|format_currency_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>(+) Outros acréscimos</dt>
+                        <dd class="text-right">{{ boleto.valor_outros_acrescimos|format_currency_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>(=) Valor cobrado</dt>
+                        <dd class="text-right">{{ boleto.valor_cobrado|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-12">
+                    <dl><dt>Pagador</dt>
+                        <dd>{{ boleto.sacado }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-campo informacoes-caption">
+                <div class="col-xs-3">Informações</div>
+                <div class="col-xs-9 text-right">NÃO COBRAR QUALQUER TARIFA DE EMISSÃO DE CARNÊ/BOLETO OU OUTRA TAXA ASSEMELHADA</div>
+            </div>
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-12 min-height informacoes-value">{% for informacao in boleto.informacoes %}{{ informacao }}<br/>{% endfor %}</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 text-right autenticacao-mecanica">Autenticação Mecânica</div>
+            </div>
+        </div>
+
+        <div class="row cut-line">
+            <div class="col-xs-12">
+                corte na linha pontilhada<br>
+                <hr>
+            </div>
+        </div>
+
+        {% endif %}
+
+        <!-- Ficha de compensação -->
+        <div id="ficha-compensacao">
+
+            <div class="row top-row">
+                <div class="col-xs-2 logo"><img src="data:image/jpg;base64,{{ logo_base64|string }}" style="height:25px;"></div>
+                <div class="col-xs-1 num-banco">085-1</div>
+                <div class="col-xs-9 linha-digitavel">{{ boleto.linha_digitavel }}</div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-9">
+                    <dl><dt>Local de pagamento</dt>
+                        <dd>{{ boleto.local_pagamento }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Vencimento</dt>
+                        <dd class="text-right">{{ boleto.vencimento|format_date_or_blank }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row  boleto-row boleto-campo">
+                <div class="col-xs-9">
+                    <dl><dt>Beneficiário</dt>
+                        <dd>{{ boleto.cedente }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Agência/Código cedente</dt>
+                        <dd class="text-right">{{ boleto.agencia|format_agencia_conta }} / {{ boleto.conta_corrente|format_agencia_conta }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-2">
+                    <dl><dt>Data do documento</dt>
+                        <dd class="text-center">{{ boleto.data_documento|format_date_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Nº documento</dt>
+                        <dd>{{ boleto.numero_documento }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Espécie doc.</dt>
+                        <dd class="text-center">{{ boleto.especie_documento }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-1 boleto-campo">
+                    <dl><dt>Aceite</dt>
+                        <dd class="text-center">{{ boleto.aceite }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Data process.</dt>
+                        <dd class="text-center">{{ boleto.data_processamento|format_date_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>Nosso número</dt>
+                        <dd class="text-right">{{ boleto.nosso_numero }}</dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row boleto-campo">
+                <div class="col-xs-2">
+                    <dl><dt>Uso do banco</dt>
+                        <dd></dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Carteira</dt>
+                        <dd class="text-center">{{ boleto.carteira }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-1 boleto-campo">
+                    <dl><dt>Espécie</dt>
+                        <dd class="text-center">{{ boleto.especie }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>Quantidade</dt>
+                        <dd class="text-center">{{ boleto.quantidade|default('', True) }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-2 boleto-campo">
+                    <dl><dt>x Valor</dt>
+                        <dd class="text-right">{{ boleto.valor_unitario|format_currency_or_blank }}</dd>
+                    </dl>
+                </div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>(=) Valor documento</dt>
+                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row-no-border">
+                <div class="col-xs-9">
+                    <strong>NÃO COBRAR QUALQUER TARIFA DE EMISSÃO DE CARNÊ/BOLETO OU OUTRA TAXA ASSEMELHADA</strong><br/> Instruções
+                </div>
+                <div class="col-xs-3 boleto-campo border">
+                    <dl><dt>(-) Desconto / Abatimento</dt>
+                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row boleto-row-no-border">
+                <div class="col-xs-9 instrucao"><span class="instrucao">{{ boleto.instrucoes|index_or_blank(0) }}</span></div>
+                <div class="col-xs-3 boleto-campo border">
+                    <dl><dt>(-) Outras deduções</dt>
+                        <dd class="text-right">{{ boleto.valor_outras_deducoes|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row boleto-row-no-border">
+                <div class="col-xs-9 instrucao"><span class="instrucao">{{ boleto.instrucoes|index_or_blank(1) }}</span></div>
+                <div class="col-xs-3 boleto-campo border">
+                    <dl><dt>(+) Moras / Multa</dt>
+                        <dd class="text-right">{{ boleto.valor_multa|format_currency_or_blank }}</dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row boleto-row-no-border">
+                <div class="col-xs-9 instrucao"><span class="instrucao">{{ boleto.instrucoes|index_or_blank(2) }}</span></div>
+                <div class="col-xs-3 boleto-campo border">
+                    <dl><dt>(+) Outros acréscimos</dt>
+                        <dd class="text-right">{{ boleto.valor_outros_acrescimos|format_currency_or_blank }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+            <div class="row boleto-row boleto-row-no-border">
+                <div class="col-xs-9 instrucao"><span class="instrucao">{{ boleto.instrucoes|index_or_blank(3) }}</span></div>
+                <div class="col-xs-3 boleto-campo">
+                    <dl><dt>(=) Valor cobrado</dt>
+                        <dd></dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row-no-border boleto-campo">
+                <div class="col-xs-12">
+                    <dl><dt>Pagador</dt>
+                        <dd>
+                            {{ boleto.sacado }}
+                            {% for extra in boleto.sacado_extra %}
+                                <br/>
+                                {{ extra }}
+                            {% endfor %}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="row boleto-row">
+                <div class="col-xs-9 boleto-campo">Sacador/Avalista: <span class="instrucao">{{ boleto.sacador_avalista }}</span></div>
+                <div class="col-xs-3 boleto-campo">Cód. baixa</div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-9">
+                    <img id="barcode" />
+                </div>
+                <div class="col-xs-3 text-center autenticacao-mecanica">
+                    FICHA DE COMPENSAÇÃO <br> Autenticação Mecânica
+                </div>
+            </div>
+        </div>
+
+        <div class="row cut-line">
+            <div class="col-xs-12">
+                corte na linha pontilhada<br>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+<script>
+    JsBarcode("#barcode", "{{ boleto.codigo_barras }}", {
+        format:"ITF", width:1.1, height:60, displayValue:false, margin:5,
+marginRight:0
+    });
+
+</script>
+
+</html>

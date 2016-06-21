@@ -27,7 +27,8 @@ TESTS_REQUIRES = [
     'pytest>=2.8.4',
     'pytest-cov>=2.2.0',
     'flake8>=2.4,<3',
-    'pep8-naming>=0.2,<1'
+    'pep8-naming>=0.2,<1',
+    'iso8601'
 ]
 
 EXTRAS_REQUIRES = {

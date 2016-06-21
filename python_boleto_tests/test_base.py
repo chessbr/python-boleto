@@ -37,9 +37,7 @@ def test_base_validate():
 
     # num_sequencial
     base.num_sequencial = ''
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "num_sequencial" in str(excinfo)
+    assert base.num_sequencial == 0
 
     base.num_sequencial = -1
     with pytest.raises(ValueError) as excinfo:
@@ -49,9 +47,7 @@ def test_base_validate():
 
     # quantidade
     base.quantidade = ''
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "quantidade" in str(excinfo)
+    assert base.quantidade == 0
 
     base.quantidade = -1
     with pytest.raises(ValueError) as excinfo:
@@ -82,51 +78,37 @@ def test_base_validate():
 
     # valor_unitario
     base.valor_unitario = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_unitario" in str(excinfo)
+    assert base.valor_unitario == Decimal(-1)
     base.valor_unitario = Decimal()
 
     # valor_documento
     base.valor_documento = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_documento" in str(excinfo)
+    assert base.valor_documento == Decimal(-1)
     base.valor_documento = Decimal()
 
     # valor_desconto
     base.valor_desconto = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_desconto" in str(excinfo)
+    assert base.valor_desconto == Decimal(-1)
     base.valor_desconto = Decimal()
 
     # valor_outras_deducoes
     base.valor_outras_deducoes = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_outras_deducoes" in str(excinfo)
+    assert base.valor_outras_deducoes == Decimal(-1)
     base.valor_outras_deducoes = Decimal()
 
     # valor_multa
     base.valor_multa = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_multa" in str(excinfo)
+    assert base.valor_multa == Decimal(-1)
     base.valor_multa = Decimal()
 
     # valor_outros_acrescimos
     base.valor_outros_acrescimos = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_outros_acrescimos" in str(excinfo)
+    assert base.valor_outros_acrescimos == Decimal(-1)
     base.valor_outros_acrescimos = Decimal()
 
     # valor_cobrado
     base.valor_cobrado = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "valor_cobrado" in str(excinfo)
+    assert base.valor_cobrado == Decimal(-1)
     base.valor_cobrado = Decimal()
 
     # numero_documento

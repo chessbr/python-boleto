@@ -19,6 +19,7 @@ import six
 from python_boleto import STATIC_DIR
 
 from . import filters
+from iso8601 import iso8601
 
 if six.PY2:
     from urlparse import urljoin
@@ -75,6 +76,27 @@ class Boleto(object):
             # as propriedades banco e template não podem ser alteradas no init
             if not k in ('banco', 'template') and hasattr(self, k):
                 setattr(self, k, v)
+
+    def __setattr__(self, name, value):
+        '''
+        Transforma os valores de acordo com os tipos
+        '''
+        if name in ('valor_unitario', 'valor_documento', 'valor_desconto',
+                    'valor_outras_deducoes', 'valor_multa', 'valor_outros_acrescimos',
+                    'valor_cobrado'):
+            value = Decimal(value)
+
+        elif name in ('vencimento', 'data_documento', 'data_processamento'):
+            if isinstance(value, six.string_types):
+                value = iso8601.parse_date(value).date()
+
+        elif name in ('quantidade', 'num_sequencial'):
+            try:
+                value = int(value)
+            except:
+                value = 0
+
+        return super(Boleto, self).__setattr__(name, value)
 
     @property
     def nosso_numero(self):

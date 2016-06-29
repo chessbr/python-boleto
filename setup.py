@@ -20,7 +20,8 @@ LICENSE = 'AGPL-3.0'
 REQUIRES = [
     'Jinja2',
     'babel',
-    'six'
+    'six',
+    'iso8601'
 ]
 
 TESTS_REQUIRES = [

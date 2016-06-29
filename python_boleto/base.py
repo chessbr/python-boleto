@@ -95,6 +95,11 @@ class Boleto(object):
                 value = int(value)
             except:
                 value = 0
+                
+        elif name in ('numero_documento', 'especie_documento', 'aceite', 'especie', 'sacado',
+                      'cpf_cei_cnpj', 'sacador_avalista', 'local_pagamento', 
+                      'cedente', 'agencia', 'conta_corrente', 'carteira', 'contrato'):
+            value = str(value)
 
         return super(Boleto, self).__setattr__(name, value)
 

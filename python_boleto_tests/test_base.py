@@ -113,101 +113,55 @@ def test_base_validate():
 
     # numero_documento
     base.numero_documento = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "numero_documento" in str(excinfo)
-    base.numero_documento = ''
+    assert base.numero_documento == '-1'
 
     # especie_documento
     base.especie_documento = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "especie_documento" in str(excinfo)
-    base.especie_documento = ''
+    assert base.especie_documento == '-1'
 
     # aceite
     base.aceite = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "aceite" in str(excinfo)
-    base.aceite = ''
+    assert base.aceite == '-1'
 
     # especie
     base.especie = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "especie" in str(excinfo)
-    base.especie = ''
-
-    # especie
-    base.especie = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "especie" in str(excinfo)
-    base.especie = ''
+    assert base.especie == '-1'
 
     # sacado
     base.sacado = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "sacado" in str(excinfo)
-    base.sacado = ''
+    assert base.sacado == '-1'
 
     # cpf_cei_cnpj
     base.cpf_cei_cnpj = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "cpf_cei_cnpj" in str(excinfo)
-    base.cpf_cei_cnpj = ''
+    assert base.cpf_cei_cnpj == '-1'
 
     # sacador_avalista
     base.sacador_avalista = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "sacador_avalista" in str(excinfo)
-    base.sacador_avalista = ''
+    assert base.especie == '-1'
 
     # local_pagamento
     base.local_pagamento = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "local_pagamento" in str(excinfo)
-    base.local_pagamento = ''
+    assert base.local_pagamento == '-1'
 
     # cedente
     base.cedente = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "cedente" in str(excinfo)
-    base.cedente = ''
+    assert base.cedente == '-1'
 
     # agencia
     base.agencia = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "agencia" in str(excinfo)
-    base.agencia = ''
+    assert base.agencia == '-1'
 
     # conta_corrente
     base.conta_corrente = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "conta_corrente" in str(excinfo)
-    base.conta_corrente = ''
+    assert base.especie == '-1'
 
     # carteira
     base.carteira = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "carteira" in str(excinfo)
-    base.carteira = ''
+    assert base.especie == '-1'
 
     # contrato
     base.contrato = -1
-    with pytest.raises(TypeError) as excinfo:
-        base.validate()
-    assert "contrato" in str(excinfo)
-    base.contrato = ''
+    assert base.especie == '-1'
 
     # instrucoes
     base.instrucoes = -1

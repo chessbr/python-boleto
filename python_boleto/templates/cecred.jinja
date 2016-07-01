@@ -146,7 +146,7 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-5">
                     <dl><dt>Benefici&aacute;rio</dt>
-                        <dd>{{ boleto.cedente }}
+                        <dd>{{ boleto.cedente|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -157,17 +157,17 @@
                 </div>
                 <div class="col-xs-1 boleto-campo">
                     <dl><dt>Espécie</dt>
-                        <dd class="text-center">{{ boleto.especie }}</dd>
+                        <dd class="text-center">{{ boleto.especie|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-1 boleto-campo">
                     <dl><dt>Quantidade</dt>
-                        <dd class="text-center">{{ boleto.quantidade|default('', True) }}</dd>
+                        <dd class="text-center">{{ boleto.quantidade|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Nosso número</dt>
-                        <dd class="text-right">{{ boleto.nosso_numero }}</dd>
+                        <dd class="text-right">{{ boleto.nosso_numero|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
             </div>
@@ -175,28 +175,28 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-2">
                     <dl><dt>Número do documento</dt>
-                        <dd>{{ boleto.numero_documento }}</dd>
+                        <dd>{{ boleto.numero_documento|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-1 boleto-campo">
                     <dl><dt>Contrato</dt>
-                        <dd>{{ boleto.contrato }}</dd>
+                        <dd>{{ boleto.contrato|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>CPF/CEI/CNPJ</dt>
-                        <dd>{{ boleto.cpf_cei_cnpj }}
+                        <dd>{{ boleto.cpf_cei_cnpj|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>Vencimento</dt>
-                        <dd class="text-center">{{ boleto.vencimento|format_date_or_blank }}</dd>
+                        <dd class="text-center">{{ boleto.vencimento|format_date_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>Valor documento</dt>
-                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank }}
+                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -205,28 +205,28 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-2">
                     <dl><dt>(-) Desconto / Abatimento</dt>
-                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank }}
+                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>(-) Outras deduções</dt>
-                        <dd class="text-right">{{ boleto.valor_outras_deducoes|format_currency_or_blank }}</dd>
+                        <dd class="text-right">{{ boleto.valor_outras_deducoes|format_currency_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>(+) Mora / Multa</dt>
-                        <dd class="text-right">{{ boleto.valor_multa|format_currency_or_blank }}</dd>
+                        <dd class="text-right">{{ boleto.valor_multa|format_currency_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>(+) Outros acréscimos</dt>
-                        <dd class="text-right">{{ boleto.valor_outros_acrescimos|format_currency_or_blank }}</dd>
+                        <dd class="text-right">{{ boleto.valor_outros_acrescimos|format_currency_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>(=) Valor cobrado</dt>
-                        <dd class="text-right">{{ boleto.valor_cobrado|format_currency_or_blank }}
+                        <dd class="text-right">{{ boleto.valor_cobrado|format_currency_or_blank|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -235,7 +235,7 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-12">
                     <dl><dt>Pagador</dt>
-                        <dd>{{ boleto.sacado }}
+                        <dd>{{ boleto.sacado|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -274,12 +274,12 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-9">
                     <dl><dt>Local de pagamento</dt>
-                        <dd>{{ boleto.local_pagamento }}</dd>
+                        <dd>{{ boleto.local_pagamento|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>Vencimento</dt>
-                        <dd class="text-right">{{ boleto.vencimento|format_date_or_blank }}</dd>
+                        <dd class="text-right">{{ boleto.vencimento|format_date_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
             </div>
@@ -287,7 +287,7 @@
             <div class="row  boleto-row boleto-campo">
                 <div class="col-xs-9">
                     <dl><dt>Beneficiário</dt>
-                        <dd>{{ boleto.cedente }}</dd>
+                        <dd>{{ boleto.cedente|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
@@ -300,32 +300,32 @@
             <div class="row boleto-row boleto-campo">
                 <div class="col-xs-2">
                     <dl><dt>Data do documento</dt>
-                        <dd class="text-center">{{ boleto.data_documento|format_date_or_blank }}</dd>
+                        <dd class="text-center">{{ boleto.data_documento|format_date_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Nº documento</dt>
-                        <dd>{{ boleto.numero_documento }}</dd>
+                        <dd>{{ boleto.numero_documento|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Espécie doc.</dt>
-                        <dd class="text-center">{{ boleto.especie_documento }}</dd>
+                        <dd class="text-center">{{ boleto.especie_documento|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-1 boleto-campo">
                     <dl><dt>Aceite</dt>
-                        <dd class="text-center">{{ boleto.aceite }}</dd>
+                        <dd class="text-center">{{ boleto.aceite|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Data process.</dt>
-                        <dd class="text-center">{{ boleto.data_processamento|format_date_or_blank }}</dd>
+                        <dd class="text-center">{{ boleto.data_processamento|format_date_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>Nosso número</dt>
-                        <dd class="text-right">{{ boleto.nosso_numero }}</dd>
+                        <dd class="text-right">{{ boleto.nosso_numero|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
             </div>
@@ -338,27 +338,27 @@
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Carteira</dt>
-                        <dd class="text-center">{{ boleto.carteira }}</dd>
+                        <dd class="text-center">{{ boleto.carteira|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-1 boleto-campo">
                     <dl><dt>Espécie</dt>
-                        <dd class="text-center">{{ boleto.especie }}</dd>
+                        <dd class="text-center">{{ boleto.especie|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>Quantidade</dt>
-                        <dd class="text-center">{{ boleto.quantidade|default('', True) }}</dd>
+                        <dd class="text-center">{{ boleto.quantidade|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-2 boleto-campo">
                     <dl><dt>x Valor</dt>
-                        <dd class="text-right">{{ boleto.valor_unitario|format_currency_or_blank }}</dd>
+                        <dd class="text-right">{{ boleto.valor_unitario|format_currency_or_blank|default('&nbsp;', true) }}</dd>
                     </dl>
                 </div>
                 <div class="col-xs-3 boleto-campo">
                     <dl><dt>(=) Valor documento</dt>
-                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank }}
+                        <dd class="text-right">{{ boleto.valor_documento|format_currency_or_blank|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -370,7 +370,7 @@
                 </div>
                 <div class="col-xs-3 boleto-campo border">
                     <dl><dt>(-) Desconto / Abatimento</dt>
-                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank }}
+                        <dd class="text-right">{{ boleto.valor_desconto|format_currency_or_blank|default('&nbsp;', true) }}
                         </dd>
                     </dl>
                 </div>
@@ -452,7 +452,7 @@
 
 <script>
     JsBarcode("#barcode", "{{ boleto.codigo_barras }}", {
-        format:"ITF", width:1.1, height:60, displayValue:false, margin:5,
+        format:"ITF", width:1.35, height:60, displayValue:false, margin:0,
 marginRight:0
     });
 

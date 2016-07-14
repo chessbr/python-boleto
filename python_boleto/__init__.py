@@ -12,4 +12,4 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 STATIC_DIR = os.path.join(BASE_DIR, 'python_boleto/static')
 
-__version__ = "0.1.0"
+__version__ = "0.1.0.post0"

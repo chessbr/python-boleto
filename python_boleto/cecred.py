@@ -65,20 +65,20 @@ class CecredBoleto(Boleto):
 
         valor = str(int(self.valor_documento * Decimal(100.0)))
 
-        linha_total = linha_total_fmt.format(**{'banco': self._banco,
+        linha_total = linha_total_fmt.format(**{'banco': "{:0>3}".format(self._banco)[-3:],
                                                 'moeda': '9',
-                                                'convenio': "{:0>6}".format(self.convenio),
-                                                'conta_corrente': "{:0>8}".format(self.conta_corrente),
-                                                'num_sequencial': "{:0>9}".format(self.num_sequencial),
-                                                'carteira': "{:0>2}".format(self.carteira),
-                                                'fator_vencto': "{:0>4}".format(self.fator_vencimento),
-                                                'valor': "{:0>10}".format(valor)})
+                                                'convenio': "{:0>6}".format(self.convenio)[-6:],
+                                                'conta_corrente': "{:0>8}".format(self.conta_corrente)[-8:],
+                                                'num_sequencial': "{:0>9}".format(self.num_sequencial)[-9:],
+                                                'carteira': "{:0>2}".format(self.carteira)[-2:],
+                                                'fator_vencto': "{:0>4}".format(self.fator_vencimento)[-4:],
+                                                'valor': "{:0>10}".format(valor)[-10:]})
 
         campo1 = linha_total[:9]
         campo2 = linha_total[9:19]
         campo3 = linha_total[19:29]
         campo4 = str(self.codigo_barras_dv)
-        campo5 = linha_total[29:]
+        campo5 = linha_total[-14:]
 
         # formata e calcula os DAC com modulo10
         campo1 = "{0}.{1}{2}".format(campo1[:5], campo1[5:], modulo10(campo1))
@@ -101,12 +101,12 @@ class CecredBoleto(Boleto):
         cod_bar_part1 = cod_bar_fmt1.format(**{'banco':self._banco,
                                                'moeda':'9'})
 
-        cod_bar_part2 = cod_bar_fmt2.format(**{'fator_vencto': "{:0>4}".format(self.fator_vencimento),
-                                               'valor': "{:0>10}".format(valor),
-                                               'convenio': "{:0>6}".format(self.convenio),
-                                               'conta_corrente': "{:0>8}".format(self.conta_corrente),
-                                               'num_sequencial': "{:0>9}".format(self.num_sequencial),
-                                               'carteira': "{:0>2}".format(self.carteira)})
+        cod_bar_part2 = cod_bar_fmt2.format(**{'fator_vencto': "{:0>4}".format(self.fator_vencimento)[-4:],
+                                               'valor': "{:0>10}".format(valor)[-10:],
+                                               'convenio': "{:0>6}".format(self.convenio)[-6:],
+                                               'conta_corrente': "{:0>8}".format(self.conta_corrente)[-8:],
+                                               'num_sequencial': "{:0>9}".format(self.num_sequencial)[-9:],
+                                               'carteira': "{:0>2}".format(self.carteira)[-2:]})
 
         dv = modulo11("{0}{1}".format(cod_bar_part1, cod_bar_part2))
         return "{0}{1}{2}".format(cod_bar_part1, dv, cod_bar_part2)

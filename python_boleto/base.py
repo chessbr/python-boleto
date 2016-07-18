@@ -6,6 +6,7 @@
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
+from __future__ import unicode_literals
 
 import base64
 import datetime
@@ -99,7 +100,7 @@ class Boleto(object):
         elif name in ('numero_documento', 'especie_documento', 'aceite', 'especie', 'sacado',
                       'cpf_cei_cnpj', 'sacador_avalista', 'local_pagamento', 
                       'cedente', 'agencia', 'conta_corrente', 'carteira', 'contrato'):
-            value = str(value)
+            value = "{0}".format(value)
 
         return super(Boleto, self).__setattr__(name, value)
 
@@ -147,7 +148,7 @@ class Boleto(object):
                 img = open(logo_img_file, "rb")
                 context_data['logo_base64'] = base64.b64encode(img.read()).decode('utf-8')
         except:
-            logger.exception(u"Erro ao converter logo em Base64")
+            logger.exception("Erro ao converter logo em Base64")
 
         return template.render(boleto=self,
                                include_recibo_sacado=include_recibo_sacado,
@@ -160,97 +161,97 @@ class Boleto(object):
 
         # inteiros
         if not isinstance(self.num_sequencial, six.integer_types):
-            raise TypeError(u"num_sequencial deve ser um inteiro")
+            raise TypeError("num_sequencial deve ser um inteiro")
         elif self.num_sequencial <= 0:
-            raise ValueError(u"num_sequencial deve maior que zero")
+            raise ValueError("num_sequencial deve maior que zero")
 
         elif not isinstance(self.quantidade, six.integer_types):
-            raise TypeError(u"quantidade deve ser um inteiro")
+            raise TypeError("quantidade deve ser um inteiro")
         elif self.quantidade < 0:
-            raise ValueError(u"quantidade deve maior ou igual a zero")
+            raise ValueError("quantidade deve maior ou igual a zero")
 
         # datas
         elif not isinstance(self.vencimento, datetime.date):
-            raise TypeError(u"vencimento deve ser do tipo data")
+            raise TypeError("vencimento deve ser do tipo data")
 
         elif not self.data_documento is None and not isinstance(self.data_documento, datetime.date):
-            raise TypeError(u"data_documento deve ser do tipo data")
+            raise TypeError("data_documento deve ser do tipo data")
 
         elif not self.data_processamento is None and not isinstance(self.data_processamento, datetime.date):
-            raise TypeError(u"data_processamento deve ser do tipo data")
+            raise TypeError("data_processamento deve ser do tipo data")
 
 
         # decimais
         elif not isinstance(self.valor_unitario, Decimal):
-            raise TypeError(u"valor_unitario deve ser do tipo Decimal")
+            raise TypeError("valor_unitario deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_documento, Decimal):
-            raise TypeError(u"valor_documento deve ser do tipo Decimal")
+            raise TypeError("valor_documento deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_desconto, Decimal):
-            raise TypeError(u"valor_desconto deve ser do tipo Decimal")
+            raise TypeError("valor_desconto deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_outras_deducoes, Decimal):
-            raise TypeError(u"valor_outras_deducoes deve ser do tipo Decimal")
+            raise TypeError("valor_outras_deducoes deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_multa, Decimal):
-            raise TypeError(u"valor_multa deve ser do tipo Decimal")
+            raise TypeError("valor_multa deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_outros_acrescimos, Decimal):
-            raise TypeError(u"valor_outros_acrescimos deve ser do tipo Decimal")
+            raise TypeError("valor_outros_acrescimos deve ser do tipo Decimal")
 
         elif not isinstance(self.valor_cobrado, Decimal):
-            raise TypeError(u"valor_cobrado deve ser do tipo Decimal")
+            raise TypeError("valor_cobrado deve ser do tipo Decimal")
 
         # strings
         elif not isinstance(self.numero_documento, six.string_types):
-            raise TypeError(u"numero_documento deve ser uma string")
+            raise TypeError("numero_documento deve ser uma string")
 
         elif not isinstance(self.especie_documento, six.string_types):
-            raise TypeError(u"especie_documento deve ser uma string")
+            raise TypeError("especie_documento deve ser uma string")
 
         elif not isinstance(self.aceite, six.string_types):
-            raise TypeError(u"aceite deve ser uma string")
+            raise TypeError("aceite deve ser uma string")
 
         elif not isinstance(self.especie, six.string_types):
-            raise TypeError(u"especie deve ser uma string")
+            raise TypeError("especie deve ser uma string")
 
         elif not isinstance(self.sacado, six.string_types):
-            raise TypeError(u"sacado deve ser uma string")
+            raise TypeError("sacado deve ser uma string")
 
         elif not isinstance(self.cpf_cei_cnpj, six.string_types):
-            raise TypeError(u"cpf_cei_cnpj deve ser uma string")
+            raise TypeError("cpf_cei_cnpj deve ser uma string")
 
         elif not isinstance(self.sacador_avalista, six.string_types):
-            raise TypeError(u"sacador_avalista deve ser uma string")
+            raise TypeError("sacador_avalista deve ser uma string")
 
         elif not isinstance(self.local_pagamento, six.string_types):
-            raise TypeError(u"local_pagamento deve ser uma string")
+            raise TypeError("local_pagamento deve ser uma string")
 
         elif not isinstance(self.cedente, six.string_types):
-            raise TypeError(u"cedente deve ser uma string")
+            raise TypeError("cedente deve ser uma string")
 
         elif not isinstance(self.agencia, six.string_types):
-            raise TypeError(u"agencia deve ser uma string")
+            raise TypeError("agencia deve ser uma string")
 
         elif not isinstance(self.conta_corrente, six.string_types):
-            raise TypeError(u"conta_corrente deve ser uma string")
+            raise TypeError("conta_corrente deve ser uma string")
 
         elif not isinstance(self.carteira, six.string_types):
-            raise TypeError(u"carteira deve ser uma string")
+            raise TypeError("carteira deve ser uma string")
 
         elif not isinstance(self.contrato, six.string_types):
-            raise TypeError(u"contrato deve ser uma string")
+            raise TypeError("contrato deve ser uma string")
 
         # listas
         elif self.instrucoes and not isinstance(self.instrucoes, list):
-            raise TypeError(u"instrucoes deve ser do tipo list")
+            raise TypeError("instrucoes deve ser do tipo list")
 
         elif self.informacoes and not isinstance(self.informacoes, list):
-            raise TypeError(u"informacoes deve ser do tipo list")
+            raise TypeError("informacoes deve ser do tipo list")
 
         elif self.sacado_extra and not isinstance(self.sacado_extra, list):
-            raise TypeError(u"sacado_extra deve ser do tipo list")
+            raise TypeError("sacado_extra deve ser do tipo list")
 
 
     def get_context_data(self):

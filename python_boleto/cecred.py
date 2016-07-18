@@ -6,6 +6,7 @@
 #
 # This source code is licensed under the AGPLv3 license found in the
 # LICENSE file in the root directory of this source tree.
+from __future__ import unicode_literals
 
 from datetime import date
 from decimal import Decimal
@@ -114,4 +115,4 @@ class CecredBoleto(Boleto):
         super(CecredBoleto, self).validate()
 
         if not self.convenio or not isinstance(self.convenio, six.string_types):
-            raise ValueError(u"convenio deve obrigatoriamente informado")
+            raise ValueError("convenio deve obrigatoriamente informado")

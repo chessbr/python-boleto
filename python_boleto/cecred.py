@@ -98,7 +98,7 @@ class CecredBoleto(Boleto):
 
         valor = str(int(self.valor_documento * Decimal(100.0)))
 
-        cod_bar_part1 = cod_bar_fmt1.format(**{'banco':self._banco,
+        cod_bar_part1 = cod_bar_fmt1.format(**{'banco':"{:0>3}".format(self._banco),
                                                'moeda':'9'})
 
         cod_bar_part2 = cod_bar_fmt2.format(**{'fator_vencto': "{:0>4}".format(self.fator_vencimento)[-4:],
